@@ -1,0 +1,83 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+  
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="login.component.css">
+</head>
+
+<script type="text/javascript">
+	var vsid = "sa76841";
+	(function() { 
+	var vsjs = document.createElement('script'); vsjs.type = 'text/javascript'; vsjs.async = true; vsjs.setAttribute('defer', 'defer');
+	 vsjs.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.virtualspirits.com/vsa/chat-'+vsid+'.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vsjs, s);
+	})();
+   </script>
+<body>
+	
+
+   
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign In</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+    <form #loginform="ngForm" (ngSubmit)="loginUser()">
+      <!-- {{loginform.form.valid}} -->
+      <small class="text-danger">{{msg}}</small>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control"  placeholder="Enter email" name="email" [(ngModel)]="user.emailId" required #email="ngModel"
+        [class.is-invalid]="email.invalid && email.touched"  
+        >
+        <!-- <small class="text-danger" [class.d-none]="email.valid || email.untouched"  >Email id is required field**</small> -->
+        <div *ngIf="email.errors && (email.invalid && email.touched)">
+          <small class="text-danger" *ngIf="email.errors.required">Email id is required field**</small>
+          <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email id**</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control"placeholder="Enter password" name="pwd" [(ngModel)]="user.password" required #password="ngModel"
+        [class.is-invalid]="password.invalid && password.touched" required pattern=".{8,}"
+        >
+        <!-- <small class="text-danger"[class.d-none]="email.valid || email.untouched">Password is Requied**</small> -->
+        <div *ngIf="password.errors && (password.invalid && password.touched)">
+          <small class="text-danger" *ngIf="password.errors.required">Password is required field**</small>
+          <small class="text-danger" *ngIf="password.errors.pattern">Minimum 8 Character**</small>
+        </div>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="remember"> Remember me</label>
+      </div>
+      <button [disabled]="loginform.form.invalid" type="submit" class="btn btn-info mr-1" routerLink="/user">Login</button>
+      <small  routerLink="/register" class="text-white" style="font-size: large; font-family: 'Times New Roman', Times, serif;">New USER ? REGISTER HERE</small> 
+        <!--<small (click)="['/register']" >New User ? Register Here</small>  -->
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</body>
+</html>
